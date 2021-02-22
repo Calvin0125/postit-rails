@@ -10,14 +10,17 @@
 <% end %>
 
 <%= form_for @post do |f| %>
-  <%= f.label :title %>
-  <%= f.text_field :title %>
-  <br/>
-  <%= f.label :url %>
-  <%= f.text_field :url %>
-  <br/>
-  <%= f.label :description %>
-  <%= f.text_area :description %>
-  <br/>
+  <div class="control-group">
+    <%= f.label :title %>
+    <%= f.text_field :title %>
+  </div>
+  <div class="control-group">
+    <%= f.label :url %>
+    <%= f.text_field :url %>
+  </div>
+  <div class="control-group">
+    <%= f.label :description %>
+    <%= f.text_area :description, rows: 5 %>
+  </div>
   <%= f.submit "#{button_value}", class: 'btn btn-primary' %>
 <% end %>
