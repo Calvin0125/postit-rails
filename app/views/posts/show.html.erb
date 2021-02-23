@@ -1,16 +1,14 @@
-<%= render 'shared/content_title', title: 'All Posts' %>
-
 <p class='pull-right'>
-  <%= link_to 'Edit Post', edit_post_path(post), class: 'btn btn-primary' %>
+  <%= link_to 'Edit Post', edit_post_path(@post), class: 'btn btn-primary' %>
 </p>
 
 <p>
-  <%= render post.categories %>
+  <%= render @post.categories %>
 </p>
 
-<%= render 'shared/content_title', title: post.title %>
+<%= render 'shared/content_title', title: @post.title %>
 
 <p>
-  <%= post.description %>
+  <%= @post.description %>
 </p>
 <br/>

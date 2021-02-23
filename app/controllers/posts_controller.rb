@@ -14,8 +14,8 @@ class PostsController < ApplicationController
   end
 
   def create
-    params[:post][:user_id] = 1
     @post = Post.new(post_params)
+    @post.user_id = 1
 
     if @post.save
       flash[:notice] = "Post successfully created"
@@ -29,7 +29,7 @@ class PostsController < ApplicationController
   end
 
   def update
-    params[:post][:user_id] = 1
+    @post.user_id = 1
     if @post.update(post_params)
       flash[:notice] = "Post successfully updated"
       redirect_to post_path(@post)
