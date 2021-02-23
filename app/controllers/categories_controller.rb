@@ -1,10 +1,6 @@
 class CategoriesController < ApplicationController
   
-  before_action :set_category, only: [:show, :edit, :update]
-
-  def index
-    @categories = Category.all
-  end
+  before_action :set_category, only: [:show]
 
   def create
     @category = Category.new(category_params)
@@ -21,18 +17,6 @@ class CategoriesController < ApplicationController
 
   def new
     @category = Category.new
-  end
-
-  def edit
-  end
-
-  def update
-    if @category.update(category_params)
-      flash[:notice] = "Category successfully renamed"
-      redirect_to category_path(@category)
-    else
-      render :edit
-    end
   end
 
   private
