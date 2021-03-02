@@ -1,6 +1,8 @@
-<p class='pull-right'>
-  <%= link_to 'Edit Post', edit_post_path(@post), class: 'btn btn-primary' %>
-</p>
+<% if @post.belongs_to_user(session[:user_id]) %>
+  <p class='pull-right'>
+    <%= link_to 'Edit Post', edit_post_path(@post), class: 'btn btn-primary' %>
+  </p>
+<% end %>
 
 <p>
   <%= render @post.categories %>
@@ -11,4 +13,23 @@
 <p>
   <%= @post.description %>
 </p>
-<br/>
+<hr/>
+
+<% if logged_in? %>
+  <%= form_for [@post, @comment] do |f| %>
+    <%= render 'shared/errors', resource: @comment %>
+    <%= f.label :body, "Leave a comment" %>
+    <%= f.text_area :body, rows: 3, class: 'span4' %>
+    <br/>
+    <%= f.submit "Create comment", class: "btn btn-primary" %>
+  <% end %>
+<% end %>
+
+<h5>Comments:</h5>
+<% @post.comments.each do |comment| %>
+  <div class="well span8">
+    <em>"<%= comment.body %>"</em><br/>
+    by <%= link_to comment.user.username, '' %> 
+    at <%= fix_time(comment.created_at) %>
+  </div>
+<% end %>

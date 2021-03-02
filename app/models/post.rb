@@ -7,4 +7,8 @@ class Post < ActiveRecord::Base
   validates :title, presence: true
   validates :url, presence: true
   validates :description, presence: true
+
+  def belongs_to_user(user_id)
+    self.user_id == user_id
+  end
 end
