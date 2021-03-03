@@ -1,6 +1,7 @@
 class UsersController < ApplicationController
-  before_action :require_user, except: :new
   before_action :set_user, only: [:edit, :update, :show]
+  before_action :require_same_user, except: [:new, :create]
+  before_action :require_user, except: [:new, :create]
 
   def new
     @user = User.new
@@ -40,6 +41,13 @@ class UsersController < ApplicationController
   end
   
   def set_user
-    @user = current_user
+    @user = User.find(params[:id])
+  end
+
+  def require_same_user
+    if @user != current_user
+      flash[:error] = "You're not allowed to do that."
+      redirect_to root_path
+    end
   end
 end
