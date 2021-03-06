@@ -12,4 +12,8 @@ class Post < ActiveRecord::Base
   def belongs_to_user(user_id)
     self.user_id == user_id
   end
+
+  def total_votes
+    self.votes.where(vote: true).size - self.votes.where(vote: false).size
+  end
 end

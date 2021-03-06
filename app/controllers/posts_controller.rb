@@ -1,6 +1,6 @@
 class PostsController < ApplicationController
 
-  before_action :set_post, only: [:show, :edit, :update]
+  before_action :set_post, only: [:show, :edit, :update, :vote]
   before_action :require_user, except: [:show, :index]
   helper_method :belongs_to_user
 
@@ -44,6 +44,17 @@ class PostsController < ApplicationController
       redirect_to post_path(@post)
     else
       render :edit
+    end
+  end
+
+  def vote
+    vote = Vote.new(vote: params[:vote], user_id: current_user.id, voteable: @post)
+    if vote.save
+      flash[:notice] = "Your vote on #{@post.title} has been counted."
+      redirect_to root_path
+    else
+      flash[:error] = "Your vote on #{@post.title} was not counted."
+      redirect_to root_path
     end
   end
 
