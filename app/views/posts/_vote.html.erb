@@ -2,7 +2,9 @@
     <%= link_to path.call(resource, vote: true), method: 'post' do %>
       <i class="icon-arrow-up"></i>
     <% end %>
-    <h5><%= resource.total_votes %></h5>
+    <br/>
+    <%= "#{resource.total_votes} #{resource.total_votes.abs == 1 ? 'vote' : 'votes'}" %>
+    <br/>
     <%= link_to path.call(resource, vote: false), method: 'post' do %>
       <i class="icon-arrow-down"></i>
     <% end %>

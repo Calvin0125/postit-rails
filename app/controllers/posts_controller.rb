@@ -5,7 +5,7 @@ class PostsController < ApplicationController
   helper_method :belongs_to_user
 
   def index
-    @posts = Post.all
+    @posts = Post.all.sort_by { |post| post.total_votes }.reverse
   end
 
   def show
@@ -51,10 +51,10 @@ class PostsController < ApplicationController
     vote = Vote.new(vote: params[:vote], user_id: current_user.id, voteable: @post)
     if vote.save
       flash[:notice] = "Your vote on #{@post.title} has been counted."
-      redirect_to root_path
+      redirect_to :back
     else
       flash[:error] = "Your vote on #{@post.title} was not counted."
-      redirect_to root_path
+      redirect_to :back
     end
   end
 
