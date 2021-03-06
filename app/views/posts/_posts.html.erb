@@ -1,5 +1,5 @@
 <% posts.each do |post|%>
-  <%= render 'posts/vote', resource: post, path: method(:vote_post_path) %>
+  <%= render 'posts/vote', resources: [post], path: method(:vote_post_path), vote_count: post.total_votes %>
   <div class="row">
     <div class='span8 well'>
       <%= render post.categories %>

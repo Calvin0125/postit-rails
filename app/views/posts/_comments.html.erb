@@ -1,5 +1,7 @@
 <h5>Comments:</h5>
 <% comments.each do |comment| %>
+<div class="wrapper" >
+  <%= render 'posts/vote', resources: [comment.post, comment], path: method(:vote_post_comment_path), vote_count: comment.total_votes %>
   <div class="well span8">
     <em>"<%= comment.body %>"</em>
     <% if profile_comments %>
@@ -9,4 +11,6 @@
     by <%= link_to comment.user.username, '' %> 
     at <%= fix_time(comment.created_at) %>
   </div>
+</div>
+<br/>
 <% end %>
