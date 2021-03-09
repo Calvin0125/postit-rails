@@ -1,11 +1,15 @@
 <div class="span0 well text-center">
+  <% if logged_in? %>
     <%= link_to path.call(*resources, vote: true), method: 'post' do %>
       <i class="icon-arrow-up"></i>
     <% end %>
     <br/>
+  <% end %>
     <%= "#{vote_count} #{vote_count.abs == 1 ? 'vote' : 'votes'}" %>
+  <% if logged_in? %>
     <br/>
     <%= link_to path.call(*resources, vote: false), method: 'post' do %>
       <i class="icon-arrow-down"></i>
     <% end %>
+  <% end %>
   </div>
