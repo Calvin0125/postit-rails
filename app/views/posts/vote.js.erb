@@ -1,0 +1,7 @@
+function voteCountText(count) {
+  return `${count} ` + `${Math.abs(count) === 1 ? "vote" : "votes"}`;
+}
+
+let newVoteCountText = voteCountText(<%= @resource.total_votes %>);
+$("#<%= @resource.class.name + @resource.id.to_s %>").text(newVoteCountText);
+$("#messages").html("<%= j render partial: 'layouts/messages' %>");

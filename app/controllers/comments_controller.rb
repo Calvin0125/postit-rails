@@ -21,11 +21,13 @@ class CommentsController < ApplicationController
     @comment = Comment.find(params[:id])
     vote = Vote.new(vote: params[:vote], user_id: current_user.id, voteable: @comment)
     if vote.save
-      flash[:notice] = "Your vote on the comment has been counted."
-      redirect_to :back
+      flash.now[:notice] = "Your vote on the comment has been counted."
     else
-      flash[:error] = "Your vote on the comment was not counted."
-      redirect_to :back
+      flash.now[:error] = "You can't vote on a comment more than once."
+    end
+    @resource = @comment
+    respond_to do |format|
+      format.js { render 'posts/vote' }
     end
   end
 

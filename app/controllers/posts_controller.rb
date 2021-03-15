@@ -50,11 +50,14 @@ class PostsController < ApplicationController
   def vote
     vote = Vote.new(vote: params[:vote], user_id: current_user.id, voteable: @post)
     if vote.save
-      flash[:notice] = "Your vote on #{@post.title} has been counted."
-      redirect_to :back
+      flash.now[:notice] = "Your vote on #{@post.title} has been counted."
     else
-      flash[:error] = "Your vote on #{@post.title} was not counted."
-      redirect_to :back
+      flash.now[:error] = "You can't vote on #{@post.title} more than once."
+    end
+
+    @resource = @post
+    respond_to do |format|
+      format.js
     end
   end
 

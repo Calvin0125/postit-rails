@@ -6,7 +6,7 @@
     </div>
     <div class="control-group">
       <%= f.label :timezone %>
-      <%= f.collection_select :timezone, ActiveSupport::TimeZone.all, :name, :name %>
+      <%= f.time_zone_select :timezone, ActiveSupport::TimeZone.us_zones %>
     </div>
     <div class="control-group">
       <%= f.label :password %>
