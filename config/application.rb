@@ -21,6 +21,7 @@ module PostitTemplate
     # config.i18n.default_locale = :de
 
     # Tealeaf note: Bootstrap sass gem addition
+    config.autoload_paths += %W(#{config.root}/lib)
     config.assets.precompile += %w(*.png *.jpg *.jpeg *.gif)
   end
 end
